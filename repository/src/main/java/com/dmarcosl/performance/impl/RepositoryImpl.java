@@ -5,6 +5,7 @@ import com.dmarcosl.performance.mapper.ModelMapper;
 import com.dmarcosl.performance.repository.ModelRepository;
 import com.dmarcosl.performance.repository.RepositoryInterface;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -28,6 +29,6 @@ public class RepositoryImpl implements RepositoryInterface {
 
   @Override
   public Flux<Domain> findAll() {
-    return modelRepository.findAll().map(modelMapper::fromModel);
+    return modelRepository.findAll(PageRequest.of(0, 10000)).map(modelMapper::fromModel);
   }
 }
